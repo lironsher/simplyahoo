@@ -12,7 +12,7 @@
 
         $answer = $user_req->answer;
         $text = $user_req->text;
-        echo "OK Yahoo - your answer for $text is:$answer";
+        echo "OK Yahoo. your answer for $text is:.  $answer";
         ?>
         
         

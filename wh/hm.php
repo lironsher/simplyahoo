@@ -10,7 +10,7 @@
 
 <Response>
     <Gather action="handle_user_input.php" numDigits="1">
-        <Say>OK Yahoo</Say>
+        <Say>OK Yahoo..</Say>
         <Say>For Wather press 1.</Say>
         <Say>For Stocks, press 2.</Say>
         <Say>For Answers, press 3.</Say>

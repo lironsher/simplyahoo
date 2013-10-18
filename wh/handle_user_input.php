@@ -14,7 +14,7 @@
             echo "<Say>Which stock would you like a quote for?</Say>";
             break;
         case 3:
-            echo "<Say>Please provide keyword</Say>";
+            echo "<Say>Please state you query?</Say>"; 
             break;
         
         default:

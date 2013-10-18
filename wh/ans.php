@@ -4,10 +4,10 @@
 // }else{
     // $zipcode = '50644';
 // }
-function getWeatherForCity($zipcode)
+function getAnswer($text)
 {
 //$zipcode = 'London';
-$qury = "select * from weather.forecast where woeid in (select woeid from geo.places where text='$zipcode' and placetype='town' limit 1)";
+$qury = "select * from answers.search where query='$text' and type='resolved'"; //"select * from weather.forecast where woeid in (select woeid from geo.places where text='$zipcode' and placetype='town' limit 1)";
 $url = 'http://query.yahooapis.com/v1/public/yql?format=json&q='.urlencode($qury);
 //$result = file_get_contents($url);
 
@@ -18,31 +18,34 @@ $json = curl_exec($session);
 
 $phpObj =  json_decode($json);  
 
-$qObj = $phpObj->query->results->channel;
+//print_r($phpObj);
+$qObj = $phpObj->query->results->Question; 
+// 
+//print_r($qObj[0]->ChosenAnswer);
+// 
+// $val = $qObj->LastTradePriceOnly;
+// $name = $qObj->Name; 
+// 
+// $answer = "Last trade price for $name is $val doller";
 
-$city = $qObj->location->city;
 
-$qObj = $qObj->item->forecast[1];
-$day = $qObj->day;
-$text = $qObj->text;
-$high = $qObj->high;
-
-//print_r($qObj);
-if ($city!="") 
-{
-	$answer = "The Forecast for $city for tomorrow is $text. Max temp $high Fahrenheit";
-
-}else
-    {
-        $answer = "The Forecast is cloudy internet. Max temp 60 Fahrenheit";
-    }
-
+// 
+// $city = $qObj->location->city;
+// 
+// $qObj = $qObj->item->forecast[1];
+// $day = $qObj->day;
+// $text = $qObj->text;
+// $high = $qObj->high;
+// 
+// //
+// 
+// $answer = "The Forecast for $city for tomorrow is $text. Max temp $high Fahrenheit";
 
 //echo "<br>$answer<br>";
- return $answer; 
+ return $qObj[0]->ChosenAnswer; 
 }
 
-//echo getWeatherForCity("london");
+//echo getAnswer("What is Apple?");
 
 // 
 // $xml = simplexml_load_string($result);

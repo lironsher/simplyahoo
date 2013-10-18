@@ -2,6 +2,7 @@
 require_once 'dal.php';
 require_once 'weather_a.php';
 require_once 'fin.php';
+require_once 'ans.php';
 // try
 // {
     // $req = new Req();  
@@ -44,7 +45,7 @@ error_log("Started",3,"~root/php.log");
   
   
   $req->text = str_replace(".", "", $req->text);
-if ($req->text!="(blank)") 
+//if (($req->digit==2)||($req->digit==5)||($req->text!="(blank)")) 
 {
 	
 
@@ -74,13 +75,15 @@ switch ($req->digit)
                     break;
                 
                 default:
-                    $req-> text = "Yahoo!";
+                    $req-> text .= "Yahoo!";
                     $req-> answer = getStockQuote("YHOO");
                     break;
             }
             
         break;
-        
+         case 3:
+             $req-> answer = getAnswer($req->text);
+             break;
                 case 5:
                     $req-> text = "Google";
                     $req-> answer = getStockQuote("GOOG");
@@ -121,10 +124,11 @@ try
 		break;
 }
 
-}else
-{
-        $req->answer = "Cannot be found";
 }
+// else
+// {
+        // $req->answer = "Cannot be found";
+// }
 
 
 
